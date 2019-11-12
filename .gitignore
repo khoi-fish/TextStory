@@ -1,0 +1,15 @@
+dist
+node_modules
+.awcache
+coverage
+yarn-error.log
+.rpt2_cache
+public
+
+# OS
+.DS_Store
+
+# Editors
+.vscode
+storybook-static
+.cache

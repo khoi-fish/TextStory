@@ -1,0 +1,20 @@
+{
+  "name": "parcel-sandbox",
+  "version": "1.0.0",
+  "description": "Simple Parcel Sandbox",
+  "license": "MIT",
+  "main": "index.html",
+  "scripts": {
+    "start": "yarn build && node dist/main.js",
+    "build": "yarn tsc"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "enquirer": "^2.3.2"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/node": "^12.12.7",
+    "typescript": "^3.7.2"
+  }
+}
