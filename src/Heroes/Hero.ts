@@ -4,10 +4,11 @@ import { Monster } from '../Monsters/Monster'
 import { Loot } from '../Loot/Loot'
 
 export class Hero {
-  private hp: number = 50
-  private mp: number = 50
-  private basicAttackDmg = 5
-  private specialAttackDmg = 20
+  protected hp: number = 50
+  protected mp: number = 50
+  protected basicAttackDmg = 5
+  protected specialAttackDmg = 20
+  protected specialAttackCost = 15
 
   constructor() {}
 
@@ -39,11 +40,21 @@ export class Hero {
   }
 
   public specialAttack(monster: Monster) {
+    if (this.getMp() < this.specialAttackCost) {
+      console.log(chalk.hex('#B9C0CB')(`\nYou do not have enough mp.\n`))
+      return
+    }
+
+    monster.setHp(monster.getHp() - this.specialAttackDmg)
+    this.setMp(this.getMp() - this.specialAttackCost)
+
     console.log(
       chalk.hex('#B9C0CB')(
-        `\nYou don't have a special attack!\n${monster.getName()} has ${chalk.green(
+        `\nYou unleash a powerful magic attack, dealing ${chalk.red(
+          this.specialAttackDmg,
+        )} damage to ${monster.getName()}. It has ${chalk.green(
           monster.getHp(),
-        )} hp left.\n`,
+        )} hp left.\n\nYou have ${chalk.blue(this.getMp())} mp left.\n`,
       ),
     )
   }

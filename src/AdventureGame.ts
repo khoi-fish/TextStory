@@ -7,6 +7,12 @@ import { Monster } from './Monsters/Monster'
 import { Hero } from './Heroes/Hero'
 import { attackPrompt } from './Prompts/AttackPrompt'
 import { classPrompt } from './Prompts/ClassPrompt'
+import { Warrior } from './Heroes/Warrior'
+import { Mage } from './Heroes/Mage'
+import { Thief } from './Heroes/Thief'
+import { Archer } from './Heroes/Archer'
+import { Joker } from './Heroes/Joker'
+import { Ninja } from './Heroes/Ninja'
 
 export class AdventureGame {
   private player: Hero
@@ -19,27 +25,46 @@ export class AdventureGame {
       ),
     )
 
-    classPrompt(['Mage', 'Warrior', 'Archer', 'Thief']).then(
+    classPrompt([
+      'Mage',
+      'Warrior',
+      'Archer',
+      'Thief',
+      'Joker',
+      'Ninja',
+      'Brawler',
+    ]).then(
       ({ classType }) => {
         switch (classType) {
           case 'Mage':
-            // TODO
+            this.player = new Mage()
             break
           case 'Warrior':
-            // TODO
+            this.player = new Warrior()
             break
           case 'Archer':
-            // TODO
+            this.player = new Archer()
             break
           case 'Thief':
-            // TODO
+            this.player = new Thief()
+            break
+          case 'Joker':
+            this.player = new Joker()
+            break
+          case 'Ninja':
+            this.player = new Ninja()
+            break
+          case 'Brawler':
+          // Fill out
+          default:
+            this.player = new Hero()
             break
         }
 
         this.dungeons = [DUNGEON_1]
-        this.player = new Hero()
         this.startGame()
       },
+      () => {},
     )
   }
 
@@ -69,8 +94,12 @@ export class AdventureGame {
       )
       console.log(monster.getDescription())
 
-      await this.fightMonster(monster)
-      monster = floor.getNextMonster()
+      try {
+        await this.fightMonster(monster)
+        monster = floor.getNextMonster()
+      } catch {
+        break
+      }
     }
 
     const loot = floor.getLoot()
@@ -98,7 +127,9 @@ export class AdventureGame {
         )
       }
 
-      monster.attack(this.player)
+      if (monster.getHp() > 0) {
+        monster.attack(this.player)
+      }
     }
   }
 }
