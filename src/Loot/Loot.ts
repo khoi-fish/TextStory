@@ -1,3 +1,5 @@
+import { Hero } from '../Heroes/Hero'
+
 export class Loot {
   private description: string
   private name: string
@@ -14,6 +16,11 @@ export class Loot {
     this.description = description
     this.hpBoost = hpBoost
     this.attackBoost = attackBoost
+  }
+
+  public applyEffect(hero: Hero) {
+    console.log('This item does nothing.')
+    return
   }
 
   public getName() {

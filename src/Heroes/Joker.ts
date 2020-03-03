@@ -1,4 +1,5 @@
 import { Hero } from './Hero'
+import { NoBlock } from '../Actions/NoBlock'
 
 export class Joker extends Hero {
   hp = 125
@@ -8,5 +9,6 @@ export class Joker extends Hero {
 
   constructor() {
     super()
+    this.blockCommand = new NoBlock()
   }
 }

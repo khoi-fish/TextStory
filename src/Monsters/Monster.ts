@@ -53,4 +53,8 @@ export class Monster {
   public getName() {
     return this.name
   }
+
+  public getAttackDmg() {
+    return this.attackDmg
+  }
 }

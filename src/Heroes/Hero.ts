@@ -1,7 +1,9 @@
-import chalk = require('chalk')
+import chalk from 'chalk'
 
 import { Monster } from '../Monsters/Monster'
 import { Loot } from '../Loot/Loot'
+import { IBlock } from '../Actions/IBlock'
+import { Block } from '../Actions/Block'
 
 export class Hero {
   protected hp: number = 50
@@ -9,8 +11,11 @@ export class Hero {
   protected basicAttackDmg = 5
   protected specialAttackDmg = 20
   protected specialAttackCost = 15
+  protected blockCommand: IBlock
 
-  constructor() {}
+  constructor() {
+    this.blockCommand = new Block()
+  }
 
   public setHp(hp: number) {
     this.hp = Math.max(hp, 0)
@@ -34,7 +39,7 @@ export class Hero {
       chalk.hex('#B9C0CB')(
         `\nYou attacked ${monster.getName()}, dealing ${chalk.red(
           this.basicAttackDmg,
-        )} damage.\nIt has ${chalk.green(monster.getHp())} hp left.\n`,
+        )} damage.\n\nIt has ${chalk.green(monster.getHp())} hp left.\n`,
       ),
     )
   }
@@ -57,6 +62,10 @@ export class Hero {
         )} hp left.\n\nYou have ${chalk.blue(this.getMp())} mp left.\n`,
       ),
     )
+  }
+
+  public block(monster: Monster) {
+    this.blockCommand.performBlock(this, monster)
   }
 
   public equip(loot: Loot) {

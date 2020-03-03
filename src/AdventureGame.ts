@@ -114,12 +114,18 @@ export class AdventureGame {
 
   private async fightMonster(monster: Monster) {
     while (monster.getHp() > 0) {
-      const { attack } = await attackPrompt(['attack', 'special attack'])
+      const { attack } = await attackPrompt([
+        'attack',
+        'special attack',
+        'block',
+      ])
 
       if (attack === 'attack') {
         this.player.basicAttack(monster)
       } else if (attack === 'special attack') {
         this.player.specialAttack(monster)
+      } else if (attack === 'block') {
+        this.player.block(monster)
       } else {
         this.player.setHp(this.player.getHp() - 5)
         console.log(
