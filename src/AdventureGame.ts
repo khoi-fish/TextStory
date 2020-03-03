@@ -114,6 +114,15 @@ export class AdventureGame {
 
   private async fightMonster(monster: Monster) {
     while (monster.getHp() > 0) {
+      if (this.player.getHp() <= 0) {
+        console.log(
+          chalk.bgBlack.redBright(
+            `\n\n\n*********************************\n*          YOU DIED!!!          *\n*********************************\n\n\n`,
+          ),
+        )
+        return 0
+      }
+
       const { attack } = await attackPrompt([
         'attack',
         'special attack',

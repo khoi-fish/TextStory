@@ -12,6 +12,7 @@ export class Hero {
   protected specialAttackDmg = 20
   protected specialAttackCost = 15
   protected blockCommand: IBlock
+  protected loot: Loot[] = []
 
   constructor() {
     this.blockCommand = new Block()
@@ -69,6 +70,6 @@ export class Hero {
   }
 
   public equip(loot: Loot) {
-    //todo
+    this.loot.push(loot)
   }
 }
