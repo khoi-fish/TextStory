@@ -4,10 +4,13 @@ import { Monster } from '../Monsters/Monster'
 import { Loot } from '../Loot/Loot'
 import { IBlock } from '../Actions/IBlock'
 import { Block } from '../Actions/Block'
+import { RecoveryStone } from '../Loot/RecoveryStone'
 
 export class Hero {
-  protected hp: number = 50
-  protected mp: number = 50
+  protected maxHp = 50
+  protected hp = 50
+  protected maxM = 50
+  protected mp = 50
   protected basicAttackDmg = 5
   protected specialAttackDmg = 20
   protected specialAttackCost = 15
@@ -19,15 +22,23 @@ export class Hero {
   }
 
   public setHp(hp: number) {
-    this.hp = Math.max(hp, 0)
+    this.hp = Math.min(Math.max(hp, 0), this.maxHp)
   }
 
   public getHp() {
     return this.hp
   }
 
+  public getMaxHp() {
+    return this.maxHp
+  }
+
   public setMp(mp: number) {
     this.mp = Math.max(mp, 0)
+  }
+
+  public getMaxMp() {
+    return this.mp
   }
 
   public getMp() {
@@ -71,5 +82,15 @@ export class Hero {
 
   public equip(loot: Loot) {
     this.loot.push(loot)
+  }
+
+  public getLoot() {
+    return this.loot
+  }
+
+  public printHp() {
+    console.log(
+      chalk.hex('#B9C0CB')(`You have ${chalk.green(this.getHp())} hp left\n\n`),
+    )
   }
 }

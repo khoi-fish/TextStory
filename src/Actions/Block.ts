@@ -15,5 +15,7 @@ export class Block implements IBlock {
         damage,
       )} damage.\n`,
     )
+
+    hero.printHp()
   }
 }

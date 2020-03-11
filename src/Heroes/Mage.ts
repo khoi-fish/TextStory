@@ -3,7 +3,9 @@ import { Monster } from '../Monsters/Monster'
 import chalk = require('chalk')
 
 export class Mage extends Hero {
+  maxHp = 50
   hp = 50
+  maxMp = 200
   mp = 200
   basicAttackDmg = 5
   specialAttackDmg = 25

@@ -31,11 +31,7 @@ export class Monster {
 
     target.setHp(target.getHp() - this.attackDmg)
 
-    console.log(
-      chalk.hex('#B9C0CB')(
-        `You have ${chalk.green(target.getHp())} hp left.\n\n`,
-      ),
-    )
+    target.printHp()
   }
 
   public getHp() {

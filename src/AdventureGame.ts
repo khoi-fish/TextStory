@@ -13,6 +13,7 @@ import { Thief } from './Heroes/Thief'
 import { Archer } from './Heroes/Archer'
 import { Joker } from './Heroes/Joker'
 import { Ninja } from './Heroes/Ninja'
+import { RecoveryStone } from './Loot/RecoveryStone'
 
 export class AdventureGame {
   private player: Hero
@@ -61,6 +62,7 @@ export class AdventureGame {
             break
         }
 
+        this.player.equip(new RecoveryStone())
         this.dungeons = [DUNGEON_1]
         this.startGame()
       },
@@ -133,17 +135,20 @@ export class AdventureGame {
         this.player.basicAttack(monster)
       } else if (attack === 'special attack') {
         this.player.specialAttack(monster)
-      } else if (attack === 'block') {
-        this.player.block(monster)
-      } else {
-        this.player.setHp(this.player.getHp() - 5)
-        console.log(
-          'There was an attempt but like everything else in your life, it resulted in failure.',
-        )
       }
 
       if (monster.getHp() > 0) {
-        monster.attack(this.player)
+        if (attack === 'block') {
+          this.player.block(monster)
+        } else {
+          monster.attack(this.player)
+        }
+
+        this.player.getLoot().map(item => {
+          if (item instanceof RecoveryStone) {
+            item.applyEffect(this.player)
+          }
+        })
       }
     }
   }
