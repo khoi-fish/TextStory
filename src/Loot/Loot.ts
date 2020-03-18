@@ -18,11 +18,6 @@ export class Loot {
     this.attackBoost = attackBoost
   }
 
-  public applyEffect(hero: Hero) {
-    console.log('This item does nothing.')
-    return
-  }
-
   public getName() {
     return this.name
   }

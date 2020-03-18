@@ -143,12 +143,6 @@ export class AdventureGame {
         } else {
           monster.attack(this.player)
         }
-
-        this.player.getLoot().map(item => {
-          if (item instanceof RecoveryStone) {
-            item.applyEffect(this.player)
-          }
-        })
       }
     }
   }

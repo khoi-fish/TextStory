@@ -4,9 +4,10 @@ import { Monster } from '../Monsters/Monster'
 import { Loot } from '../Loot/Loot'
 import { IBlock } from '../Actions/IBlock'
 import { Block } from '../Actions/Block'
-import { RecoveryStone } from '../Loot/RecoveryStone'
+import { IHeroSubject } from './IHeroSubject'
+import { IHeroObserver } from '../Loot/IHeroObserver'
 
-export class Hero {
+export class Hero implements IHeroSubject {
   protected maxHp = 50
   protected hp = 50
   protected maxM = 50
@@ -15,7 +16,7 @@ export class Hero {
   protected specialAttackDmg = 20
   protected specialAttackCost = 15
   protected blockCommand: IBlock
-  protected loot: Loot[] = []
+  protected observers: Set<IHeroObserver> = new Set()
 
   constructor() {
     this.blockCommand = new Block()
@@ -82,10 +83,6 @@ export class Hero {
 
   public equip(loot: Loot) {
     this.loot.push(loot)
-  }
-
-  public getLoot() {
-    return this.loot
   }
 
   public printHp() {
